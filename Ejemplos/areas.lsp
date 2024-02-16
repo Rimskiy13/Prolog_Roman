@@ -6,8 +6,8 @@
 
 (defun areaTriangulo ( )
     (format t "Ingresa la base del triangulo: ")
-    (let (val (read)))
+    (setq base (read))
     (format t "Ingresa la altura del triangulo: ")
-    (let (altura (read)))
+    (setq altura (read))
     (format t "El area del triangulo es: ~A.~%" (/ (* base altura) 2))
 )
