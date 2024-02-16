@@ -1,0 +1,8 @@
+(defun sumaNumero( )
+    (princ "Dame un numero: ")
+    (setq num1 (read))
+    (princ "Dame otro numero: ")
+    (setq num2 (read))
+    (setq resultado (+ num1 num2))
+    (write resultado)
+)

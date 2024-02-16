@@ -1,0 +1,13 @@
+(defun areaCuadrado( )
+    (princ "Ingresa el lado del cuadrado: ")
+    (setq lado (read))
+    (format t "El area del cuadrado con lado ~A es igual a ~A.~%" lado (* lado lado))
+)
+
+(defun areaTriangulo ( )
+    (format t "Ingresa la base del triangulo: ")
+    (let (val (read)))
+    (format t "Ingresa la altura del triangulo: ")
+    (let (altura (read)))
+    (format t "El area del triangulo es: ~A.~%" (/ (* base altura) 2))
+)
