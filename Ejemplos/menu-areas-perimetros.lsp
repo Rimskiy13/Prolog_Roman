@@ -1,0 +1,27 @@
+(defun menuAreas()
+    (format t "1. Area cuadrado~%2. Area triangulo~%Opcion:")
+    (setq op (read))
+    (case op
+        ((1) (format t "Area Cuadrado~%")
+            (princ "Ingresa el lado del cuadrado: ")
+            (setq lado (read))
+            (areaCuadrado lado)
+        )
+
+        ((2) (format t "Area Triangulo~%")
+            (princ "Ingresa la base del triangulo: ")
+            (setq base (read))
+            (princ "Ingresa la altura del triangulo: ")
+            (setq altura (read))
+            (areaTriangulo base altura)
+        )
+    )
+)
+
+(defun areaCuadrado(lado)
+    (format t "El area del cuadrado con lado ~A es igual a ~A.~%" lado (* lado lado))
+)
+
+(defun areaTriangulo (base altura)
+    (format t "El area del triangulo es: ~A.~%" (/ (* base altura) 2))
+)
