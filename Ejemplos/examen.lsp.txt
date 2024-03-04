@@ -1,0 +1,12 @@
+;;; Ejercicio 1 ;;;
+(defun suma(limite)
+	(if (= limite 0)
+		0
+		(+ limite (suma(- limite 1)))   
+	)
+)
+
+;;; Ejercicio 4 ;;;
+(defun Devuelve3(list)
+	()
+)
