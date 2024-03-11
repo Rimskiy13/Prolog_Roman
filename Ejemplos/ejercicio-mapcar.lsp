@@ -29,5 +29,12 @@
 )
 
 (defun recorre()
-    `(Al ,(car *nodes*) )
+    ;`(Al ,(car *nodes*) 
+    ;(car (cadr (assoc 'Guia *nodes*)))
+    ;(car (assoc 'Guia *nodes*))
+    ;(cdr (assoc 'Guia *nodes*))
+    ;(mapcar #'car (cdr (assoc 'Guia *nodes*)))
+    ;(mapcar #'car (car (cdr (assoc 'Guia *nodes*))))
+    ;(mapcar #'car (car (cdr (assoc 'Guia *nodes*))))
+    (assoc 'Especialidad (car (cdr (assoc 'Guia *nodes*))))
 )
