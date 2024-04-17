@@ -1,0 +1,53 @@
+-La tierra es un planeta
+  Planeta(tierra).
+  Constante de individuo: Tierra
+  Propiedad: Planeta
+  Cuantificador: -
+  Predicado: Monario 
+
+-La luna no es planeta
+  ¬Planeta(luna).
+  Constante de individuo: Luna
+  Propiedad: PLaneta
+  Cuantificador: -
+  Predicado: Monario
+
+- La Tierra gira alrededor del Sol
+  GiraAlrededor(Tierra, Sol).
+  Constante de individuo: Tierra, Sol
+  Propiedad: Gira alrededor
+  Cuantificador: -
+  Predicado: Binaria
+
+-Todo planeta es un satelite
+  Constante de individuo: -
+  Propiedad: planeta, satelite
+  Cuantificador: Universal
+  Predicado: Monario
+
+- Todo planeta gira alrededor del Sol
+  GiraAlrededor(X, Sol).
+  Constante de individuo: Sol
+  Variable de individuo: Planeta (Porque puede ser cualquier planeta dentro de la expresion)
+  Propiedad: gira alrededor, planeta 
+  Cuantificador: Universal
+  Predicado: Binaria
+
+- Algun planeta gira alrededor de la Luna
+  GiraAlrededor(X, Luna).
+  Constante de individuo: Luna
+  Variable de individuo: planeta
+  Propiedad: gira alrededor, planeta
+  Cunantificador: Existencial
+  Predicado: Binaria
+
+- Hay por lo menos un satelite
+  Existe(Satelite).
+  Constante de individuo: -
+  Variable de individuo: Satelite
+  Propiedad: Satelite
+  Cuantificador: Existencial
+  Predicado: Monario 
+
+  - Todos los perros del vecindario muerden a algun cartero 
+  
