@@ -1,0 +1,37 @@
+1. Existe una persona en la feria tal que si dicha persona paga entonces todas las personas pagan
+    -Constante de individuo: -
+    -Propiedad: persona, personas
+    -Cunantificador: existencial, universal
+    -Predicado: Monario
+
+
+2. Socrates es un hombre. Los hombres son mortales. Luego, Socrates es mortal 
+    -Constante de individuo: Socrates
+    -Propiedad: hombre, mortales
+    -Cuantificador: -
+    -Predicado: Monario
+
+3. Hay estudiantes inteligentes y hay estudiantes trabajadores. Por tanto, hay estudiantes inteligentes y trabajadores
+    -Constante de individuo: -
+    -Propiedad: estudiantes, inteligentes, trabajadores
+    -Cuantificador: existencial
+    -Predicado: binario
+
+4. En cierto pais oriental se ha celebrado la fase final de campeonato mundial de futbol. 
+    Cierto diario deportivo ha publicado las sigueintes estadisticas de tan magno acontecimiento:
+        A todos los porteros que no vistieron camisite negra les marco un gol algun delantero europeo.
+        Algun portero jugo con botas blancas y solo le marcaron goles jugadores con botas blancas.
+        Ningun portero se marco un gol a si mismo.
+        Ningun jugador con botas blancas vistio camisite negra.
+        Por tanto, algun delantero europeo jugo con botas blancas. 
+            -Constante de individuo: -
+            -Propiedad: porteros,delantero europe, viste camiseta negra, marco gol, jugo con botas blancas
+            -Cuantificador: universal, exitencial, existencial unico, negacion existencial
+            -Predicado: monario, binario
+
+5. Socrates era el maestro de Platon. Socrates tuvo, a lo sumo, un discipulo. 
+   Aristoteles fue discipulo de alguien cuyo maestro fue Socrates. Por consigueinte, Platon fue el maestro de Aristoteles 
+        -Constante de individuo: Socrates, Platon, Aristoteles
+        -Propiedad: maestro de, discipulo de, 
+        -Cuantificador: -
+        Predicado: Monario, binario
