@@ -24,8 +24,11 @@ template([buendia, mi, nombre, es, s(_), '.'], ['buen dia', 'Como', estas, tu, 0
 template([hola, ',', mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [5]).
 template([buendia, ',', mi, nombre, es, s(_), '.'], ['Buendia', 'Como', estas, tu, 0, '?'], [5]).
 
-template([hola, _], ['Hola', 'como', estas, tu, '?'], []).
-template([buendia, _], ['Buendia', 'Como', estas, tu, '?'], []).
+template([hola, ',' ,que, tal, s(_), '.'], ['Hola', 'que', 'tal', 'como', 'estas', '?'], [4]). %1
+templatetemplate([quien, eres, '?'], ['Hola', 'yo', 'soy', 'Eliza'], [3]). 				   %2
+template([s(_), es, el, mejor, juego, que, existe, '.'], ['Bueno', ' me alegra que te guste', 0, 'pero no coincido con tus gustos'], [0]).
+
+template([buendia, _], ['Buendia', 'Como', estas, '?'], []).
 
 template([yo, s(_), yo, soy, s(_),'.'], [por, que, 0, eres, 1, '?'], [1, 4]).
 template([yo, s(_), tu, '.'], [why, do, you, 0, me ,'?'], [1]).
