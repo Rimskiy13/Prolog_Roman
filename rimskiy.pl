@@ -149,6 +149,191 @@ mereceta(Es, M, E):-medicinade(M, E),sintomade(S, E), atiendeespecialista(Es,S).
 %---------------------------------------------------------------------------------------------------------------------
 % Fin Sistema Experto Diagnostico
 
+%---------------------------------------------------------------------------------------------------------------------
+% Sistema Experto Arbol Genialogico
+
+abuelopaterno(fermin).
+abuelapaterna(guadalupe).
+tiapaterna(carmen).
+tiapaterna(lupe).
+tiapaterna(angelica).
+tiapaterna(belen).
+tiopaterno(margarito).
+tiopaterno(chema).
+primopaterno(ramon).
+primopaterno(gaby).
+primopaterno(yolanda).
+padre(alejandro).
+
+abuelomaterno(sacramento).
+abuelamaterna(rosa).
+tiomaterno(ruben).
+tiamaterna(carmenguillen).
+madre(rosamaria).
+
+hermanode(alejandro, carmen). 
+hermanode(alejandro, lupe).
+hermanode(alejandro, belen).
+hermanode(alejandro, margarito).
+hermanode(alejandro, chema).
+
+hermanode(lupe, alejandro).
+hermanode(lupe, carmen).
+hermanode(lupe, belen).
+hermanode(lupe, margarito).
+hermanode(lupe, chema).
+
+hermanode(belen, alejandro).
+hermanode(belen, carmen).
+hermanode(belen, lupe).
+hermanode(belen, margarito).
+hermanode(belen, chema).
+
+hermanode(margarito, alejandro).
+hermanode(margarito, carmen).
+hermanode(margarito, lupe).
+hermanode(margarito, belen).
+hermanode(margarito, chema).
+
+hermanode(chema, alejandro).
+hermanode(chema, carmen).
+hermanode(chema, lupe).
+hermanode(chema, belen).
+hermanode(chema, margarito).
+
+hermanode(alejandrochavez, leo).
+hermanode(alejandrochavez, andrea).
+hermanode(alejandrochavez, roman).
+
+hermanode(leo, alejandrochavez).
+hermanode(leo, andrea).
+hermanode(leo, roman).
+
+hermanode(andrea, alejandrochavez).
+hermanode(andrea, leo).
+hermanode(andrea, roman).
+
+hermanode(roman, alejandrochavez).
+hermanode(roman, leo).
+hermanode(roman, andrea).
+
+padrede(fermin, carmen).
+padrede(fermin, lupe).
+padrede(fermin, margarito).
+padrede(fermin, chema).
+padrede(fermin, alejandro).
+
+madrede(guadalupe, carmen).
+madrede(guadalupe, lupe).
+madrede(guadalupe, margarito).
+madrede(guadalupe, chema).
+
+madrede(carmen, ramon).
+madrede(belen, gaby).
+madrede(rosamaria, alejandrochavez).
+madrede(rosamaria, leo).
+madrede(rosamaria, andrea).
+madrede(rosamaria, roman).
+padrede(chema, yolanda).
+padrede(alejandro, alejandrochavez).
+padrede(alejandro, leo).
+padrede(alejandro, andrea).
+padrede(alejandro, roman).
+
+abuelode(fermin, ramon).
+abuelode(fermin, gaby).
+abuelode(fermin, yolanda).
+abuelode(fermin, alejandrochavez).
+abuelode(fermin, leo).
+abuelode(fermin, andrea).
+abuelode(fermin, roman).
+
+abuelade(guadalupe, ramon).
+abuelade(guadalupe, gaby).
+abuelade(guadalupe, yolanda).
+abuelade(guadalupe, alejandrochavez).
+abuelade(guadalupe, leo).
+abuelade(guadalupe, andrea).
+abuelade(guadalupe, roman).
+
+tiode(alejandro, ramon).
+tiode(lupe, ramon).
+tiode(belen, ramon).
+tiode(margarito, ramon).
+tiode(chema, ramon).
+
+tiode(alejandro, gaby).
+tiode(lupe, gaby).
+tiode(belen, gaby).
+tiode(margarito, gaby).
+tiode(chema, gaby).
+
+tiode(lupe, alejandrochavez).
+tiode(belen, alejandrochavez).
+tiode(margarito, alejandrochavez).
+tiode(chema, alejandrochavez).
+
+tiode(lupe, leo).
+tiode(belen, leo).
+tiode(margarito, leo).
+tiode(chema, leo).
+
+tiode(lupe, andrea).
+tiode(belen, andrea).
+tiode(margarito, andrea).
+tiode(chema, andrea).
+
+tiode(lupe, roman).
+tiode(belen, roman).
+tiode(margarito, roman).
+tiode(chema, roman).
+
+% Reglas
+abuelo(X, Y) :- padrede(X, Z), padrede(Z, Y).
+abuela(X, Y) :- madrede(X, Z), padrede(Z, Y).
+
+hermano(X, Y) :- padrede(Z, X), madrede(M, X), padrede(Z, Y), madrede(M, Y), X \= Y.
+hermana(X, Y) :- hermano(X, Y), mujer(X).
+
+tio(X, Y) :- hermanode(X, Z), padrede(Z, Y).
+tia(X, Y) :- hermanode(X, Z), padrede(Z, Y), mujer(X).
+
+primo(X, Y) :- tiode(Z, X), padrede(Z, Y).
+prima(X, Y) :- primo(X, Y), mujer(X).
+
+abuelosde(X, L):- findall(I, abuelode(I,X), P), findall(J, abuelade(J,X), M), append(P, M, L).
+padresde(X, L):- findall(I, padrede(I,X), P), findall(J, madrede(J,X), M), append(P, M, L). 
+hermanosde(X, L):- findall(I, hermanode(I,X), L).
+tiosde(X, L):- findall(I, tiode(I, X), L).
+primosde(X, L):- findall(I, primo(I, X), L).
+
+% Hechos adicionales para definir género
+mujer(carmen).
+mujer(lupe).
+mujer(angelica).
+mujer(belen).
+mujer(gaby).
+mujer(yolanda).
+mujer(rosamaria).
+mujer(guadalupe).
+mujer(rosa).
+mujer(carmenguillen).
+mujer(andrea).
+
+hombre(fermin).
+hombre(alejandro).
+hombre(margarito).
+hombre(chema).
+hombre(ramon).
+hombre(alejandrochavez).
+hombre(leo).
+hombre(roman).
+hombre(sacramento).
+hombre(ruben).
+
+%---------------------------------------------------------------------------------------------------------------------
+% Sistema Experto Arbol Genialogico
+
 % pregunta algo que le gusta a rimskiy
 template([te, gustan, las, s(_), _], [flagLike], [3]).
 template([te, gustan, los, s(_), _], [flagLike], [3]).
@@ -222,7 +407,26 @@ template([s(_),'.'], [flagEspecialistaCuatro], [0]).
 template([como, estas, tu, '?'], [yo, estoy, bien, ',', gracias, por, preguntar, '.'], []).
 template([yo, pienso, que, _], [bueno, esa, es, tu, opinion], []).
 template([porque, _], [esa, no, es, una, buena, razon, '.'], []).
-				  
+
+% templates arbol genialogico %
+template([s(_), es, padre, de, s(_)], [flagPadreDe], [0,4]).
+template([s(_), es, el, papa, de, s(_)], [flagPadreDe], [0,5]).
+template([s(_), es, la, mama, de, s(_)], [flagMadreDe], [0,5]).
+template([s(_), es, primo, de, s(_)], [flagPrimoDe], [0,4]).
+template([s(_), es, tio, de, s(_)], [flagTioDe], [0,4]).
+template([s(_), es, tia, de, s(_)], [flagTioDe], [0,4]).
+template([s(_), es, abuelo, de, s(_)], [flagAbueloDe], [0,4]).
+template([s(_), es, abuelito, de, s(_)], [flagAbueloDe], [0,4]).
+template([s(_), es, abuela, de, s(_)], [flagAbuelaDe], [0,4]).
+template([s(_), es, abuelita, de, s(_)], [flagAbuelaDe], [0,4]).
+template([quienes, son, los, abuelos, de, s(_),'?'], [flagAbuelosDe], [5]).
+template([quienes, son, los, abuelitos, de, s(_),'?'], [flagAbuelosDe], [5]).
+template([quienes, son, los, papas, de, s(_),'?'], [flagPapasDe], [5]).
+template([quienes, son, los, padres, de, s(_),'?'], [flagPapasDe], [5]).
+template([quienes, son, los, hermanos, de, s(_),'?'], [flagHermanosDe], [5]).
+template([quienes, son, los, tios, de, s(_),'?'], [flagTiosDe], [5]).
+template([quienes, son, los, primos, de, s(_),'?'], [flagPrimosDe], [5]).
+
 template(_, ['Ups no te entendi :p', '.'], []). 
 % Lo que le gusta a eliza : flagLike
 elizaLikes(X, R):- likes(X), R = ['Si, me gusta', X].
@@ -310,6 +514,27 @@ especialistaEnfermedadDos(E,R):- findall(X, especialistade(X, E), S), R = ['Los 
 especialistaEnfermedadTres(E,F,R):- especialistade(E, F), R = ['Si, si vas con el ',E, ' te atiende el ',F].
 especialistaEnfermedadTres(E,F,R):- \+especialistade(E, F), findall(X, especialistade(X, F), S), R = ['No, si vas con el ',E, ' no te atendera el ',F, ' seras referido a un especilista ',S].
 especialistaEnfermedadCuatro(E, R):- findall(X, especialistade(X, E), S), R = ['Quien te atiende el ',E,' son los especialistas ', S].
+
+padreDe(P,H,R):- padrede(P, H), R = [H,' es hijo de ', P].
+padreDe(P,H,R):- \+padrede(P, H), R = [H,' no es hijo de ', P].
+madreDe(M,H,R):- madrede(P, H), R = [M,' es madre de ', H].
+madreDe(M,H,R):- \+madrede(P, H), R = [M,' es madre de ', H].
+primoDe(P,S,R):- primo(P, S), R = [P, ' es primo de ', S].
+primoDe(P,S,R):- \+primo(P, S), R = [P, ' es primo de ', S].
+tioDe(T,S,R):- tio(T, S), R =[T,' es tio de ',S].
+tioDe(T,S,R):- \+tio(T, S), R =[T,' no es tio de ',S].
+tiaDe(T,S,R):- tia(T, S), R =[T,' es tia de ',S].
+tiaDe(T,S,R):- \+tia(T, S), R =[T,' no es tia de ',S].
+abueloDe(A,S,R):- abuelo(A, S), R = [A,' es abuelo de ',S].
+abueloDe(A,S,R):- \+abuelo(A, S), R = [A,' no es abuelo de ',S].
+abuelaDe(A,S,R):- abuela(A, S), R = [A,' es abuela de ',S].
+abuelaDe(A,S,R):- \+abuela(A, S), R = [A,' no es abuela de ',S].
+
+abuelosDe(X,R):- abuelosde(X,L), R = ['Los abuelos de ',X,' son ',L].
+papasDe(X,R):- padresde(X,L), R = ['Los papas de ',X,' son ',L].
+hermanosDe(X,R):- hermanosde(X,L), R = ['Los hermanos de ',X,' son ',L].
+tiosDe(X,R):- tiosde(X,L), R = ['Los tios de ',X,' son ',L].
+primosDe(X,R):- primosde(X,L), R = ['Los primos de ',X,' son ',L].
 
 match([],[]).
 match([], _):- true.
@@ -451,6 +676,86 @@ replace0([I|_], Input, _, Resp, R) :-
 	nth0(0, Resp, X),
     X == flagEspecialistaCuatro,
     especialistaEnfermedadCuatro(Atom, R).
+
+% Rimskiy te dice quien es el familiar de:
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagPadreDe,
+    padreDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagMadreDe,
+    madreDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagPrimoDe,
+    primoDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagTioDe,
+    tioDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagTiaDe,
+    tiaDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagAbueloDe,
+    abueloDe(Atom, Atom1, R).
+
+replace0([I,J], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(0, Resp, X),
+    X == flagAbuelaDe,
+    abuelaDe(Atom, Atom1, R).
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+    X == flagAbuelosDe,
+    abuelosDe(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+    X == flagPapasDe,
+    papasDe(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+    X == flagHermanosDe,
+    hermanosDe(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+    X == flagTiosDe,
+    tiosDe(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+    X == flagPrimosDe,
+    primosDe(Atom, R).
 
 replace0([I|Index], Input, N, Resp, R):-
 	length(Index, M), M =:= 0,
