@@ -68,6 +68,8 @@ sintomade(ictericia, hepatitis). %la ictericia es síntoma de hepatitis
 sintomade(fiebre, hepatitis).
 sintomade(dolorestomacal, hepatitis).
 sintomade(orinaoscura, hepatitis).
+sintomade(pielamarilla, hepatitis).
+sintomade(cansancio, hepatitis).
 
 sintomade(fiebre, herpeszoster).
 sintomade(escalofrio, herpeszoster).
@@ -389,6 +391,9 @@ template([s(_), medicamentos], [flagMedicamentosHepatitis], [0]).
 template([top, medicamentos, s(_)], [flagMedicamentosHepatitis], [2]).
 template([s(_),'.'], [flagMedicamentosHepatitis], [0]).
 
+% template revision %
+template([rimskiy, tengo, s(_), y, s(_), tengo, s(_),'?'], [flagTengo], [2,4,6]).
+
 % templates para que me diga los especialistas de las enfermedades %
 template([quien, atiende, el, s(_)], [flagEspecialista], [3]).
 template([que, especialista, atiende, el, s(_)], [flagEspecialista], [4]).
@@ -514,6 +519,10 @@ especialistaEnfermedadDos(E,R):- findall(X, especialistade(X, E), S), R = ['Los 
 especialistaEnfermedadTres(E,F,R):- especialistade(E, F), R = ['Si, si vas con el ',E, ' te atiende el ',F].
 especialistaEnfermedadTres(E,F,R):- \+especialistade(E, F), findall(X, especialistade(X, F), S), R = ['No, si vas con el ',E, ' no te atendera el ',F, ' seras referido a un especilista ',S].
 especialistaEnfermedadCuatro(E, R):- findall(X, especialistade(X, E), S), R = ['Quien te atiende el ',E,' son los especialistas ', S].
+tengoSintomas(S1,S2,E,R):- sintomade(S1,E), sintomade(S2,E), R = ['Los sintomas ',S1,' y ',S2,' pertenecen a el ', E,' por tanto podrias tener ',E].
+tengoSintomas(S1,S2,E,R):- \+sintomade(S1,E), sintomade(S2,E), R = ['El sintoma ',S1,' no es sintoma de ',E,' el sintoma ',S2,' si pertenece a el ',E,' verifica tus sintomas con un especialista'].
+tengoSintomas(S1,S2,E,R):- sintomade(S1,E), \+sintomade(S2,E), R = ['El sintoma ',S1,' es sintoma de ',E,' el sintoma ',S2,' no pertenece a el ',E,' verifica tus sintomas con un especialista']. 
+tengoSintomas(S1,S2,E,R):- \+sintomade(S1,E), \+sintomade(S2,E), R = ['Los sintomas ',S1 ,' y ',S2,' no son sintomas de el ',E].
 
 padreDe(P,H,R):- padrede(P, H), R = [H,' es hijo de ', P].
 padreDe(P,H,R):- \+padrede(P, H), R = [H,' no es hijo de ', P].
@@ -632,6 +641,15 @@ replace0([I,J,K], Input, _, Resp, R1,R2,R3) :-
 	nth0(0, Resp, X),
     X == flagSintomasHepatitisTres,
     sintomasDeHepatitisTres(Atom, Atom1, Atom2, R1, R2, R3).
+
+% Rimskiy te dice si tengo la enfermedad:
+replace0([I,J,K], Input, _, Resp, R) :- 
+    nth0(I, Input, Atom),
+	nth0(J, Input, Atom1),
+	nth0(K, Input, Atom2),
+	nth0(0, Resp, X),
+    X == flagTengo,
+    tengoSintomas(Atom, Atom1, Atom2, R).
 
 % Rimskiy te dice los medicamnetos de hepatitis:
 replace0([I|_], Input, _, Resp, R) :- 

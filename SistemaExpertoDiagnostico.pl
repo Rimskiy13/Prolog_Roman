@@ -49,8 +49,3 @@ buscar([], E , 0).
 buscar(X , E , 1) :- sintomade(X, E).
 buscar([X|Xs] , E , P) :- enfermedad(E) , buscar(X, E , S1) , buscar(Xs , E ,S2) , P is S1 + S2.
 cantSint(E , C) :- findall(X , sintomade(X, E) , L) ,length(L , R), C is R.
-
-tiode(lupe, andrea).
-tiode(belen, andrea).
-tiode(margarito, andrea).
-tiode(chema, andrea).
